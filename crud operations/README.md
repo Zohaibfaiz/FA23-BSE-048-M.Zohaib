@@ -1,4 +1,103 @@
 # Database CRUD Operations
+# Database Comparison Project
+
+This project demonstrates the output comparison of three different database systems:
+
+- MongoDB
+- MySQL
+- SQLite
+
+---
+
+## 📌 Objective
+
+To perform basic database operations and compare the outputs of:
+- MongoDB (NoSQL)
+- MySQL (Relational Database)
+- SQLite (Lightweight Relational Database)
+
+---
+
+## 🗄️ Databases Used
+
+### 1. MongoDB
+- NoSQL database
+- Document-based storage
+- Flexible schema
+
+### 2. MySQL
+- Relational Database Management System
+- Uses structured tables
+- SQL-based queries
+
+### 3. SQLite
+- Serverless relational database
+- Lightweight and file-based
+- No separate server required
+
+---
+
+## ⚙️ Operations Performed
+
+- Database creation
+- Table / Collection creation
+- Data insertion
+- Data retrieval
+- Output display
+
+---
+
+## 📸 Output Screenshots
+
+### MongoDB Output
+![MongoDB Output](./mongodb_output.jpg)
+
+### MySQL Output
+![MySQL Output](./mysql_output.jpg)
+
+### SQLite Output
+![SQLite Output](./sqlite_output.jpg)
+
+---
+
+## ▶️ How to Run
+
+### MongoDB
+1. Start MongoDB server
+2. Run MongoDB queries
+
+### MySQL
+1. Start MySQL server
+2. Execute SQL queries
+
+### SQLite
+1. Open SQLite
+2. Run SQLite commands
+
+---
+
+## 🆚 Comparison
+
+| Feature        | MongoDB | MySQL | SQLite |
+|---------------|----------|--------|--------|
+| Type          | NoSQL    | Relational | Relational |
+| Schema        | Flexible | Fixed | Fixed |
+| Server Needed | Yes | Yes | No |
+| Storage Type  | Document | Table | File |
+
+---
+
+## 👨‍💻 Author
+
+Your Name  
+Database Management System Project
+
+---
+
+## 📌 Conclusion
+
+This project helps understand the practical differences between MongoDB, MySQL, and SQLite by comparing their outputs and behavior.
+
 
 Is repository mein alag-alag databases ke saath CRUD (Create, Read, Update, Delete) operations ke examples hain.
 
