@@ -49,14 +49,17 @@ To perform basic database operations and compare the outputs of:
 
 ## 📸 Output Screenshots
 
-### MongoDB Output
-![MongoDB Output](./mongodb_output.jpg)
+### ![WhatsApp Image 2026-02-20 at 8 40 21 AM (1)](https://github.com/user-attachments/assets/f6979085-64be-48e4-ba51-29236feaeb4c)
+MongoDB Output
+
 
 ### MySQL Output
-![MySQL Output](./mysql_output.jpg)
+
+![WhatsApp Image 2026-02-20 at 8 40 20 AM](https://github.com/user-attachments/assets/c5551564-fb37-4159-98ed-bb6013068ba4)
 
 ### SQLite Output
-![SQLite Output](./sqlite_output.jpg)
+![WhatsApp Image 2026-02-20 at 8 40 21 AM](https://github.com/user-attachments/assets/78d3a32c-8594-4c46-b9da-d55a6c24800c)
+
 
 ---
 
