@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SQLite CRUD</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        form {
+            margin-bottom: 2rem;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        input,
+        button {
+            padding: 0.5rem;
+            margin-right: 0.5rem;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            background: #f9f9f9;
+            border-bottom: 1px solid #eee;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        button.delete {
+            background: #ff4d4d;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button.edit {
+            background: #4d94ff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>SQLite CRUD Operations</h1>
+
+    <form id="itemForm">
+        <input type="hidden" id="itemId">
+        <input type="text" id="name" placeholder="Name" required>
+        <input type="text" id="description" placeholder="Description">
+        <button type="submit" id="submitBtn">Add Item</button>
+        <button type="button" id="cancelBtn" style="display:none;">Cancel</button>
+    </form>
+
+    <ul id="itemList"></ul>
+
+    <script>
+        const API_URL = 'http://localhost:3002/api/items'; // Different port for SQLite
+        const form = document.getElementById('itemForm');
+        const itemList = document.getElementById('itemList');
+        const submitBtn = document.getElementById('submitBtn');
+        const cancelBtn = document.getElementById('cancelBtn');
+        const itemIdInput = document.getElementById('itemId');
+        const nameInput = document.getElementById('name');
+        const descInput = document.getElementById('description');
+
+        // Fetch and display items
+        async function fetchItems() {
+            try {
+                const res = await fetch(API_URL);
+                const items = await res.json();
+                itemList.innerHTML = '';
+                items.forEach(item => {
+                    const li = document.createElement('li');
+                    const span = document.createElement('span');
+                    const strong = document.createElement('strong');
+                    strong.textContent = item.name;
+                    span.appendChild(strong);
+                    span.appendChild(document.createTextNode(`: ${item.description || ''}`));
+                    const actions = document.createElement('div');
+                    const editBtn = document.createElement('button');
+                    editBtn.className = 'edit';
+                    editBtn.textContent = 'Edit';
+                    editBtn.addEventListener('click', () => {
+                        editItem(item.id, item.name, item.description ?? '');
+                    });
+                    const deleteBtn = document.createElement('button');
+                    deleteBtn.className = 'delete';
+                    deleteBtn.textContent = 'Delete';
+                    deleteBtn.addEventListener('click', () => {
+                        deleteItem(item.id);
+                    });
+                    actions.appendChild(editBtn);
+                    actions.appendChild(deleteBtn);
+                    li.appendChild(span);
+                    li.appendChild(actions);
+                    itemList.appendChild(li);
+                });
+            } catch (err) {
+                console.error("Error fetching items:", err);
+            }
+        }
+
+        // Add or Update Item
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const id = itemIdInput.value;
+            const name = nameInput.value;
+            const description = descInput.value;
+
+            const method = id ? 'PUT' : 'POST';
+            const url = id ? `${API_URL}/${id}` : API_URL;
+
+            await fetch(url, {
+                method: method,
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, description })
+            });
+
+            resetForm();
+            fetchItems();
+        });
+
+        // Delete Item
+        async function deleteItem(id) {
+            if (confirm('Are you sure?')) {
+                await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
+                fetchItems();
+            }
+        }
+
+        // Edit Item (Populate Form)
+        window.editItem = (id, name, description) => {
+            itemIdInput.value = id;
+            nameInput.value = name;
+            descInput.value = description ?? '';
+            submitBtn.textContent = 'Update Item';
+            cancelBtn.style.display = 'inline-block';
+        };
+
+        // Cancel Edit
+        cancelBtn.addEventListener('click', () => {
+            resetForm();
+        });
+
+        function resetForm() {
+            itemIdInput.value = '';
+            nameInput.value = '';
+            descInput.value = '';
+            submitBtn.textContent = 'Add Item';
+            cancelBtn.style.display = 'none';
+        }
+
+        fetchItems();
+    </script>
+</body>
+
+</html>
