@@ -1,0 +1,33 @@
+<h2 class="mb-3">Menu Item Details</h2>
+
+<div class="card shadow-sm">
+  <div class="card-body">
+    <h4 class="card-title"><%= item.name %></h4>
+    <h6 class="card-subtitle mb-2 text-muted">
+      <%= item.category || 'Uncategorized' %>
+    </h6>
+    <p class="card-text">
+      <%= item.description || 'No description provided.' %>
+    </p>
+    <p class="fw-bold">Price: $<%= item.price %></p>
+    <p>
+      Status:
+      <span
+        class="badge <%= item.isAvailable ? 'bg-success' : 'bg-secondary' %>"
+      >
+        <%= item.isAvailable ? 'Available' : 'Unavailable' %>
+      </span>
+    </p>
+    <a href="/menu-items/<%= item.id %>/edit" class="btn btn-warning">Edit</a>
+    <form
+      action="/menu-items/<%= item.id %>?_method=DELETE"
+      method="POST"
+      class="d-inline-block ms-2"
+      onsubmit="return confirm('Delete this item?');"
+    >
+      <button type="submit" class="btn btn-danger">Delete</button>
+    </form>
+    <a href="/menu-items" class="btn btn-secondary ms-2">Back to List</a>
+  </div>
+</div>
+

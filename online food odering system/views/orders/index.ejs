@@ -1,0 +1,56 @@
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h2>Orders</h2>
+  <a href="/orders/new" class="btn btn-primary">Create Order</a>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped table-hover align-middle">
+    <thead class="table-dark">
+      <tr>
+        <th>ID</th>
+        <th>Customer</th>
+        <th>Phone</th>
+        <th>Status</th>
+        <th>Created At</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if (orders.length === 0) { %>
+      <tr>
+        <td colspan="6" class="text-center text-muted">
+          No orders yet. Create one to get started.
+        </td>
+      </tr>
+      <% } %>
+      <% orders.forEach(function (order) { %>
+      <tr>
+        <td><%= order.id %></td>
+        <td><%= order.customerName %></td>
+        <td><%= order.customerPhone || '-' %></td>
+        <td>
+          <span class="badge bg-info text-dark"><%= order.status %></span>
+        </td>
+        <td><%= order.createdAt.toLocaleString() %></td>
+        <td>
+          <a href="/orders/<%= order.id %>" class="btn btn-sm btn-outline-primary"
+            >View</a
+          >
+          <a href="/orders/<%= order.id %>/edit" class="btn btn-sm btn-warning"
+            >Edit</a
+          >
+          <form
+            action="/orders/<%= order.id %>?_method=DELETE"
+            method="POST"
+            class="d-inline-block"
+            onsubmit="return confirm('Delete this order?');"
+          >
+            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+          </form>
+        </td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+

@@ -1,0 +1,90 @@
+<section class="py-4">
+  <div class="row align-items-center g-4">
+    <div class="col-lg-7">
+      <div class="stat-pill mb-3 d-inline-flex">
+        <i class="bi bi-lightning-charge-fill"></i>
+        <span> Fast delivery</span>
+        <span> • </span>
+        <i class="bi bi-shield-check"></i>
+        <span> Fresh & safe</span>
+      </div>
+      <h1 class="hero-title">Order Delicious Food Online</h1>
+      <p class="hero-subtitle">
+        Browse menu items, create orders, and manage everything in a simple, modern dashboard.
+      </p>
+      <div class="d-flex gap-2 mt-3">
+        <a href="/menu-items" class="btn btn-primary">
+          <i class="bi bi-card-list me-2"></i>Browse Menu
+        </a>
+        <a href="/orders" class="btn btn-outline-primary">
+          <i class="bi bi-receipt me-2"></i>View Orders
+        </a>
+      </div>
+    </div>
+    <div class="col-lg-5">
+      <div class="row g-3">
+        <div class="col-12 col-sm-4 col-lg-12">
+          <div class="stats-box text-center h-100">
+            <div class="stats-number"><%= (stats && stats.totalMenuItems) || 0 %></div>
+            <div class="text-muted">Available Items</div>
+          </div>
+        </div>
+        <div class="col-6 col-sm-4">
+          <div class="stats-box text-center h-100">
+            <div class="stats-number"><%= (stats && stats.totalOrders) || 0 %></div>
+            <div class="text-muted">Total Orders</div>
+          </div>
+        </div>
+        <div class="col-6 col-sm-4">
+          <div class="stats-box text-center h-100">
+            <div class="stats-number"><%= (stats && stats.pendingOrders) || 0 %></div>
+            <div class="text-muted">Pending</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="mt-4">
+  <div class="section-header">
+    <h2>Featured Items</h2>
+    <a href="/menu-items" class="btn btn-sm btn-outline-primary">View All</a>
+  </div>
+
+  <% if (featuredItems && featuredItems.length > 0) { %>
+    <div class="row">
+      <% featuredItems.forEach(function (item) { %>
+        <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
+          <div class="card h-100">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title"><%= item.name %></h5>
+              <h6 class="card-subtitle mb-2 text-muted">
+                <%= item.category || 'Uncategorized' %>
+              </h6>
+              <p class="card-text flex-grow-1">
+                <%= item.description || 'Tasty and freshly prepared.' %>
+              </p>
+              <p class="fw-bold mb-2">$<%= item.price %></p>
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="badge <%= item.isAvailable ? 'bg-success' : 'bg-secondary' %>">
+                  <%= item.isAvailable ? 'Available' : 'Unavailable' %>
+                </span>
+                <a href="/menu-items/<%= item.id %>" class="btn btn-sm btn-outline-primary">
+                  Details
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  <% } else { %>
+    <div class="feature-card text-center">
+      <div class="mb-2">Abhi tak featured items nahi hain.</div>
+      <a href="/menu-items/new" class="btn btn-success">
+        Pehla item add karein
+      </a>
+    </div>
+  <% } %>
+</section>

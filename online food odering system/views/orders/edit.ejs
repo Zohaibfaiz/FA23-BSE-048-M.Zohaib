@@ -1,0 +1,49 @@
+<h2 class="mb-3">Edit Order</h2>
+
+<form action="/orders/<%= order.id %>?_method=PUT" method="POST" class="row g-3">
+  <div class="col-md-6">
+    <label class="form-label">Customer Name</label>
+    <input
+      type="text"
+      name="customerName"
+      class="form-control"
+      value="<%= order.customerName %>"
+      required
+    />
+  </div>
+  <div class="col-md-6">
+    <label class="form-label">Customer Phone</label>
+    <input
+      type="text"
+      name="customerPhone"
+      class="form-control"
+      value="<%= order.customerPhone %>"
+    />
+  </div>
+  <div class="col-md-4">
+    <label class="form-label">Status</label>
+    <select name="status" class="form-select">
+      <option value="Pending" <%= order.status === 'Pending' ? 'selected' : '' %>>
+        Pending
+      </option>
+      <option
+        value="Confirmed"
+        <%= order.status === 'Confirmed' ? 'selected' : '' %>
+      >
+        Confirmed
+      </option>
+      <option
+        value="Delivered"
+        <%= order.status === 'Delivered' ? 'selected' : '' %>
+      >
+        Delivered
+      </option>
+    </select>
+  </div>
+
+  <div class="col-12">
+    <button type="submit" class="btn btn-primary">Update Order</button>
+    <a href="/orders" class="btn btn-secondary ms-2">Cancel</a>
+  </div>
+</form>
+
