@@ -119,17 +119,20 @@ auth="Authorization: Bearer demo-token"
 curl -i -H "$auth" http://localhost:3000/users/1
 ```
 
-## Output screenshots (add your 2 pics here)
+## Output screenshots 
 
 Put your screenshots in `docs/images/` and they will render here.
 
-### 1) `/products` output
+### 1)  output
 
-![Products Output](docs/images/products-output.png)
+![WhatsApp Image 2026-02-26 at 7 34 15 PM](https://github.com/user-attachments/assets/6edb5f5c-7e6b-4c11-a461-c8abc383614a)
 
-### 2) `/users/1` unauthorized/authorized output
 
-![Users Output](docs/images/users-output.png)
+
+### 2)  unauthorized/authorized output
+![WhatsApp Image 2026-02-26 at 7 33 26 PM](https://github.com/user-attachments/assets/8278fa82-db75-44a3-94d3-60c6f53ae7f9)
+
+
 
 ## Project structure
 
