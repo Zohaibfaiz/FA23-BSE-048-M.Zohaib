@@ -8,6 +8,15 @@ A modern, professional food ordering web application built with Node.js, Express
 ![MySQL](https://img.shields.io/badge/MySQL-v8.0-orange)
 
 ---
+outputs
+![WhatsApp Image 2026-02-26 at 7 33 26 PM](https://github.com/user-attachments/assets/b81408a9-ad85-4beb-98f4-54f0fd032529)
+
+
+![WhatsApp Image 2026-02-26 at 7 34 15 PM](https://github.com/user-attachments/assets/341e3e26-40e0-4354-b860-41f932329bbd)
+
+![WhatsApp Image 2026-02-26 at 8 42 30 PM](https://github.com/user-attachments/assets/23b67b70-bc1d-400e-b652-e43f1433baae)
+
+
 
 ## 📋 Table of Contents
 
