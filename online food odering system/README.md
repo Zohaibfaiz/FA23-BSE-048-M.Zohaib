@@ -9,10 +9,11 @@ A modern, professional food ordering web application built with Node.js, Express
 
 ---
 outputs
-![WhatsApp Image 2026-02-26 at 7 33 26 PM](https://github.com/user-attachments/assets/b81408a9-ad85-4beb-98f4-54f0fd032529)
+![WhatsApp Image 2026-02-26 at 8 41 51 PM (1)](https://github.com/user-attachments/assets/25f4e188-32a6-45e0-b385-1d874a5cc1d8)
+
+![WhatsApp Image 2026-02-26 at 8 41 51 PM](https://github.com/user-attachments/assets/fd8617e5-fbe5-484c-b366-82e30b35add2)
 
 
-![WhatsApp Image 2026-02-26 at 7 34 15 PM](https://github.com/user-attachments/assets/341e3e26-40e0-4354-b860-41f932329bbd)
 
 ![WhatsApp Image 2026-02-26 at 8 42 30 PM](https://github.com/user-attachments/assets/23b67b70-bc1d-400e-b652-e43f1433baae)
 
