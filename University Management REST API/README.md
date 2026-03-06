@@ -26,6 +26,24 @@ university-api/
 ```
 
 ---
+## outputs
+
+
+![WhatsApp Image 2026-03-06 at 8 04 05 AM](https://github.com/user-attachments/assets/c12856a4-71bd-4e92-a807-68d19b6f26cb)
+
+
+![WhatsApp Image 2026-03-06 at 8 04 04 AM](https://github.com/user-attachments/assets/5bbd4c89-da90-4e30-b28b-78aaf45a3f8e)
+
+![WhatsApp Image 2026-03-05 at 9 46 29 PM](https://github.com/user-attachments/assets/311ae4b3-991c-4869-9715-03a02e7d82da)
+
+![WhatsApp Image 2026-03-05 at 9 46 28 PM](https://github.com/user-attachments/assets/dd1de0a4-5c61-481e-bed1-9872db580be4)
+
+
+
+![WhatsApp Image 2026-03-05 at 9 46 27 PM](https://github.com/user-attachments/assets/4b264c82-191f-42e8-922e-8f6340066898)
+
+
+
 
 ## 🚀 Step 1: Install & Run
 
