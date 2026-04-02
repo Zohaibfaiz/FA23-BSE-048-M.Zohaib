@@ -37,13 +37,11 @@ export async function middleware(request: NextRequest) {
       }
     );
 
-    // Refresh session if expired
-    await supabase.auth.getUser();
-
     const protectedPaths = ['/dashboard', '/admin', '/moderator', '/super-admin'];
     const isProtectedPath = protectedPaths.some((path) => request.nextUrl.pathname.startsWith(path));
 
     if (isProtectedPath) {
+      // Refresh session if expired and get the user once.
       const {
         data: { user },
       } = await supabase.auth.getUser();
@@ -87,7 +85,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: [
-    '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
-  ],
+  matcher: ['/dashboard/:path*', '/admin/:path*', '/moderator/:path*', '/super-admin/:path*'],
 };

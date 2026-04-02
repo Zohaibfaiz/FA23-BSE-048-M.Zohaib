@@ -84,11 +84,11 @@ export default async function AdDetailDashboardPage({ params }: { params: { id: 
                   </p>
                   <p className="text-sm leading-7 text-slate-600 whitespace-pre-wrap">{ad.description}</p>
                 </div>
-                {ad.status === 'draft' ? (
+                {['draft', 'submitted'].includes(ad.status) ? (
                   <Link href={`/dashboard/ads/${ad.id}/edit`}>
                     <Button className="rounded-full">
                       <Pencil className="mr-2 h-4 w-4" />
-                      Edit Draft
+                      Edit Listing
                     </Button>
                   </Link>
                 ) : null}

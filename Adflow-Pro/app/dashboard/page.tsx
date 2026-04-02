@@ -68,9 +68,11 @@ export default async function DashboardPage() {
                         <Link href={`/dashboard/ads/${ad.id}`}>
                           <Button variant="outline" className="rounded-full">View</Button>
                         </Link>
-                        <Link href={`/dashboard/ads/${ad.id}/edit`}>
-                          <Button className="rounded-full bg-orange-500 text-slate-950 hover:bg-orange-400">Edit</Button>
-                        </Link>
+                        {['draft', 'submitted'].includes(ad.status) ? (
+                          <Link href={`/dashboard/ads/${ad.id}/edit`}>
+                            <Button className="rounded-full bg-orange-500 text-slate-950 hover:bg-orange-400">Edit</Button>
+                          </Link>
+                        ) : null}
                       </div>
                     </div>
                   </div>

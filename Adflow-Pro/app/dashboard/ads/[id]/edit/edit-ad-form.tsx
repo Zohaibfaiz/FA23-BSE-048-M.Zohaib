@@ -75,11 +75,11 @@ export default function EditAdForm({
         throw new Error(payload.error || 'Failed to save changes');
       }
 
-      toast.success('Draft updated successfully');
+      toast.success('Listing updated successfully');
       router.push(`/dashboard/ads/${adId}`);
       router.refresh();
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : 'Failed to update draft');
+      toast.error(error instanceof Error ? error.message : 'Failed to update listing');
     } finally {
       setLoading(false);
     }
@@ -95,10 +95,10 @@ export default function EditAdForm({
 
         <div className="mt-6 grid gap-6 xl:grid-cols-[1fr_1fr]">
           <div className="surface-dark hero-outline rounded-[2.25rem] p-8 text-white">
-            <p className="section-kicker">Draft Editor</p>
-            <h1 className="mt-4 text-4xl font-semibold tracking-tight">Refine the campaign before it enters moderation.</h1>
+            <p className="section-kicker">Listing Editor</p>
+            <h1 className="mt-4 text-4xl font-semibold tracking-tight">Refine the campaign details before the next workflow step.</h1>
             <p className="mt-4 max-w-xl text-base leading-8 text-slate-300">
-              You can update copy, category, pricing, and media while this listing is still in draft.
+              Update copy, category, pricing, and media while the listing is editable.
             </p>
           </div>
 
@@ -106,7 +106,7 @@ export default function EditAdForm({
             <CardContent className="p-8">
               <div className="mb-6 flex items-start justify-between gap-4">
                 <div>
-                  <p className="section-kicker-light">Edit Draft</p>
+                  <p className="section-kicker-light">Edit Listing</p>
                   <h2 className="mt-2 text-3xl font-semibold tracking-tight">{initialAd.title}</h2>
                 </div>
                 <Sparkles className="h-6 w-6 text-orange-500" />

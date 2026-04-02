@@ -19,12 +19,12 @@ export default async function EditAdPage({ params }: { params: { id: string } })
     redirect('/dashboard');
   }
 
-  // Only the ad owner can edit, and only while it's still a draft.
+  // Only the ad owner can edit, and only while it's in an editable state.
   if (ad.user_id !== user.id) {
     redirect('/dashboard');
   }
 
-  if (ad.status !== 'draft') {
+  if (!['draft', 'submitted'].includes(ad.status)) {
     redirect(`/dashboard/ads/${params.id}`);
   }
 
