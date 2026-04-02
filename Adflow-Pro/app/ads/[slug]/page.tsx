@@ -21,16 +21,16 @@ export default async function AdDetailPage({ params }: { params: { slug: string 
   const heroMedia = media?.[0];
 
   return (
-    <div className="min-h-screen bg-[radial-gradient(circle_at_top,_rgba(249,115,22,0.16),_transparent_24%),linear-gradient(180deg,_#fffaf5_0%,_#ffffff_45%,_#f8fafc_100%)]">
-      <header className="sticky top-0 z-20 border-b border-white/50 bg-white/80 backdrop-blur-xl">
+    <div className="page-shell">
+      <header className="shell-header sticky top-0 z-20">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-          <Link href="/" className="text-xl font-semibold tracking-tight text-slate-950">AdFlow Pro</Link>
+          <Link href="/" className="brand-mark text-xl font-semibold tracking-tight text-slate-950">AdFlow Pro</Link>
           <div className="flex items-center gap-3">
             <Link href="/explore">
               <Button variant="ghost" className="rounded-full">Back to Explore</Button>
             </Link>
             <Link href="/auth/register">
-              <Button className="rounded-full bg-slate-950 hover:bg-slate-800">Launch Your Ad</Button>
+              <Button className="rounded-full">Launch Your Ad</Button>
             </Link>
           </div>
         </div>
@@ -38,10 +38,10 @@ export default async function AdDetailPage({ params }: { params: { slug: string 
 
       <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
         <section className="grid gap-6 xl:grid-cols-[1.18fr_0.82fr]">
-          <div className="rounded-[2rem] border border-slate-200 bg-white/85 p-6 shadow-[0_20px_60px_rgba(15,23,42,0.08)]">
+          <div className="surface-card rounded-[2rem] p-6 shadow-[0_20px_60px_rgba(15,23,42,0.08)]">
             <div className="flex flex-wrap items-center gap-3">
-              {ad.is_featured ? <Badge className="rounded-full bg-orange-500 text-slate-950 hover:bg-orange-500">Featured</Badge> : null}
-              <Badge className="rounded-full bg-slate-950 text-white hover:bg-slate-950">{ad.package_name}</Badge>
+              {ad.is_featured ? <Badge className="rounded-full border-orange-200 bg-orange-100 text-orange-700 hover:bg-orange-100">Featured</Badge> : null}
+              <Badge className="rounded-full border-slate-900 bg-slate-900 text-white hover:bg-slate-900">{ad.package_name}</Badge>
               {ad.is_verified_seller ? (
                 <span className="inline-flex items-center gap-2 rounded-full bg-emerald-100 px-3 py-1 text-xs font-medium text-emerald-700">
                   <BadgeCheck className="h-3.5 w-3.5" />
@@ -73,15 +73,15 @@ export default async function AdDetailPage({ params }: { params: { slug: string 
             </div>
 
             <div className="mt-6 grid gap-4 md:grid-cols-3">
-              <div className="rounded-[1.25rem] border border-slate-200 bg-slate-50/80 p-4">
+              <div className="surface-card-muted rounded-[1.25rem] p-4">
                 <p className="text-sm text-slate-500">Category</p>
                 <p className="mt-2 font-medium text-slate-900">{ad.category_name}</p>
               </div>
-              <div className="rounded-[1.25rem] border border-slate-200 bg-slate-50/80 p-4">
+              <div className="surface-card-muted rounded-[1.25rem] p-4">
                 <p className="text-sm text-slate-500">Seller</p>
                 <p className="mt-2 font-medium text-slate-900">{ad.seller_name || 'Marketplace Seller'}</p>
               </div>
-              <div className="rounded-[1.25rem] border border-slate-200 bg-slate-50/80 p-4">
+              <div className="surface-card-muted rounded-[1.25rem] p-4">
                 <p className="text-sm text-slate-500">Pricing</p>
                 <p className="mt-2 font-medium text-slate-900">{ad.price ? formatCurrency(Number(ad.price)) : 'Contact for price'}</p>
               </div>
@@ -109,24 +109,24 @@ export default async function AdDetailPage({ params }: { params: { slug: string 
           </div>
 
           <div className="space-y-6">
-            <Card className="rounded-[2rem] border-slate-200 bg-white/85 shadow-[0_20px_60px_rgba(15,23,42,0.08)]">
+            <Card className="surface-card rounded-[2rem] shadow-[0_20px_60px_rgba(15,23,42,0.08)]">
               <CardContent className="p-6">
-                <p className="text-xs uppercase tracking-[0.28em] text-slate-500">Contact Seller</p>
+                <p className="section-kicker-light">Contact Seller</p>
                 <div className="mt-5 space-y-4">
                   {ad.contact_email ? (
-                    <a href={`mailto:${ad.contact_email}`} className="flex items-center gap-3 rounded-[1.25rem] border border-slate-200 bg-slate-50/80 p-4 text-slate-900">
+                    <a href={`mailto:${ad.contact_email}`} className="surface-card-muted flex items-center gap-3 rounded-[1.25rem] p-4 text-slate-900">
                       <Mail className="h-4 w-4 text-orange-500" />
                       {ad.contact_email}
                     </a>
                   ) : null}
                   {ad.contact_phone ? (
-                    <a href={`tel:${ad.contact_phone}`} className="flex items-center gap-3 rounded-[1.25rem] border border-slate-200 bg-slate-50/80 p-4 text-slate-900">
+                    <a href={`tel:${ad.contact_phone}`} className="surface-card-muted flex items-center gap-3 rounded-[1.25rem] p-4 text-slate-900">
                       <Phone className="h-4 w-4 text-orange-500" />
                       {ad.contact_phone}
                     </a>
                   ) : null}
                   {ad.website_url ? (
-                    <a href={ad.website_url} target="_blank" rel="noreferrer" className="flex items-center gap-3 rounded-[1.25rem] border border-slate-200 bg-slate-50/80 p-4 text-slate-900">
+                    <a href={ad.website_url} target="_blank" rel="noreferrer" className="surface-card-muted flex items-center gap-3 rounded-[1.25rem] p-4 text-slate-900">
                       <Globe className="h-4 w-4 text-orange-500" />
                       Visit website
                     </a>
@@ -135,9 +135,9 @@ export default async function AdDetailPage({ params }: { params: { slug: string 
               </CardContent>
             </Card>
 
-            <Card className="rounded-[2rem] border-slate-200 bg-white/85 shadow-[0_20px_60px_rgba(15,23,42,0.08)]">
+            <Card className="surface-card rounded-[2rem] shadow-[0_20px_60px_rgba(15,23,42,0.08)]">
               <CardContent className="p-6">
-                <p className="text-xs uppercase tracking-[0.28em] text-slate-500">Listing Trust</p>
+                <p className="section-kicker-light">Listing Trust</p>
                 <div className="mt-5 space-y-3 text-sm leading-7 text-slate-600">
                   <p>Only published and non-expired ads appear in the marketplace.</p>
                   <p>Content has already passed moderation and payment verification.</p>

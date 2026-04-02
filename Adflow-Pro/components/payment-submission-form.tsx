@@ -53,7 +53,7 @@ export function PaymentSubmissionForm({ adId }: { adId: string }) {
         <Label htmlFor="notes">Notes</Label>
         <Input id="notes" value={notes} onChange={(e) => setNotes(e.target.value)} placeholder="Optional note for finance team" />
       </div>
-      <Button type="submit" disabled={isPending} className="w-full rounded-full bg-slate-950 hover:bg-slate-800">
+      <Button type="submit" disabled={isPending} className="w-full rounded-full">
         {isPending ? 'Submitting...' : 'Submit Payment'}
       </Button>
     </form>

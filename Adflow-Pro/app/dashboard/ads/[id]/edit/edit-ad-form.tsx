@@ -86,7 +86,7 @@ export default function EditAdForm({
   };
 
   return (
-    <div className="min-h-screen bg-[radial-gradient(circle_at_top,_rgba(249,115,22,0.14),_transparent_28%),linear-gradient(180deg,_#fffaf5_0%,_#ffffff_40%,_#f8fafc_100%)]">
+    <div className="page-shell">
       <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
         <button onClick={() => router.push(`/dashboard/ads/${adId}`)} className="inline-flex items-center gap-2 text-sm text-slate-600 transition hover:text-slate-950">
           <ArrowLeft className="h-4 w-4" />
@@ -94,19 +94,19 @@ export default function EditAdForm({
         </button>
 
         <div className="mt-6 grid gap-6 xl:grid-cols-[1fr_1fr]">
-          <div className="rounded-[2rem] bg-slate-950 p-8 text-white shadow-[0_40px_120px_rgba(15,23,42,0.24)]">
-            <p className="text-xs uppercase tracking-[0.35em] text-orange-300">Draft Editor</p>
+          <div className="surface-dark hero-outline rounded-[2.25rem] p-8 text-white">
+            <p className="section-kicker">Draft Editor</p>
             <h1 className="mt-4 text-4xl font-semibold tracking-tight">Refine the campaign before it enters moderation.</h1>
             <p className="mt-4 max-w-xl text-base leading-8 text-slate-300">
               You can update copy, category, pricing, and media while this listing is still in draft.
             </p>
           </div>
 
-          <Card className="rounded-[2rem] border-slate-200 bg-white/85 shadow-[0_20px_60px_rgba(15,23,42,0.08)]">
+          <Card className="surface-card rounded-[2rem] shadow-[0_20px_60px_rgba(15,23,42,0.08)]">
             <CardContent className="p-8">
               <div className="mb-6 flex items-start justify-between gap-4">
                 <div>
-                  <p className="text-xs uppercase tracking-[0.28em] text-slate-500">Edit Draft</p>
+                  <p className="section-kicker-light">Edit Draft</p>
                   <h2 className="mt-2 text-3xl font-semibold tracking-tight">{initialAd.title}</h2>
                 </div>
                 <Sparkles className="h-6 w-6 text-orange-500" />
@@ -126,7 +126,7 @@ export default function EditAdForm({
                 <div className="grid gap-4 md:grid-cols-2">
                   <div className="space-y-2">
                     <Label htmlFor="category_id">Category</Label>
-                    <select id="category_id" value={formData.category_id} onChange={(e) => setFormData((prev) => ({ ...prev, category_id: e.target.value }))} className="flex h-11 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm" required>
+                    <select id="category_id" value={formData.category_id} onChange={(e) => setFormData((prev) => ({ ...prev, category_id: e.target.value }))} className="flex h-11 w-full rounded-[1.1rem] px-4 text-sm" required>
                       <option value="">Select category</option>
                       {categories.map((category) => (
                         <option key={category.id} value={category.id}>{category.name}</option>
@@ -135,7 +135,7 @@ export default function EditAdForm({
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="city_id">City</Label>
-                    <select id="city_id" value={formData.city_id} onChange={(e) => setFormData((prev) => ({ ...prev, city_id: e.target.value }))} className="flex h-11 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm" required>
+                    <select id="city_id" value={formData.city_id} onChange={(e) => setFormData((prev) => ({ ...prev, city_id: e.target.value }))} className="flex h-11 w-full rounded-[1.1rem] px-4 text-sm" required>
                       <option value="">Select city</option>
                       {cities.map((city) => (
                         <option key={city.id} value={city.id}>{city.name}</option>
@@ -146,7 +146,7 @@ export default function EditAdForm({
 
                 <div className="space-y-2">
                   <Label htmlFor="package_id">Package</Label>
-                  <select id="package_id" value={formData.package_id} onChange={(e) => setFormData((prev) => ({ ...prev, package_id: e.target.value }))} className="flex h-11 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm" required>
+                  <select id="package_id" value={formData.package_id} onChange={(e) => setFormData((prev) => ({ ...prev, package_id: e.target.value }))} className="flex h-11 w-full rounded-[1.1rem] px-4 text-sm" required>
                     <option value="">Select package</option>
                     {packages.map((pkg) => (
                       <option key={pkg.id} value={pkg.id}>
@@ -210,7 +210,7 @@ export default function EditAdForm({
                 ) : null}
 
                 <div className="flex gap-3">
-                  <Button type="submit" disabled={loading} className="flex-1 rounded-full bg-slate-950 py-6 text-base hover:bg-slate-800">
+                  <Button type="submit" disabled={loading} className="flex-1 rounded-full py-6 text-base">
                     {loading ? 'Saving...' : 'Save Changes'}
                   </Button>
                   <Button type="button" variant="outline" className="flex-1 rounded-full py-6" onClick={() => router.push(`/dashboard/ads/${adId}`)}>

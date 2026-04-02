@@ -163,7 +163,7 @@ export function SuperAdminControlPanel(props: {
             <input type="checkbox" checked={packageForm.homepage_visibility} onChange={(e) => setPackageForm((current) => ({ ...current, homepage_visibility: e.target.checked }))} />
             Homepage visibility
           </label>
-          <Button type="submit" disabled={creatingPackage} className="w-full rounded-full bg-slate-950 hover:bg-slate-800">
+          <Button type="submit" disabled={creatingPackage} className="w-full rounded-full">
             {creatingPackage ? 'Creating...' : 'Create Package'}
           </Button>
         </form>
@@ -216,7 +216,7 @@ export function SuperAdminControlPanel(props: {
           <Label htmlFor="category-name">Create category</Label>
           <Input id="category-name" value={categoryForm.name} onChange={(e) => setCategoryForm((current) => ({ ...current, name: e.target.value, slug: current.slug || slugify(e.target.value) }))} placeholder="Category name" required />
           <Input value={categoryForm.slug} onChange={(e) => setCategoryForm((current) => ({ ...current, slug: slugify(e.target.value) }))} placeholder="category-slug" required />
-          <Button type="submit" disabled={creatingCategory} className="w-full rounded-full bg-slate-950 hover:bg-slate-800">
+          <Button type="submit" disabled={creatingCategory} className="w-full rounded-full">
             {creatingCategory ? 'Creating...' : 'Create Category'}
           </Button>
         </form>
@@ -273,7 +273,7 @@ export function SuperAdminControlPanel(props: {
             <Input value={cityForm.state} onChange={(e) => setCityForm((current) => ({ ...current, state: e.target.value }))} placeholder="State" />
             <Input value={cityForm.country} onChange={(e) => setCityForm((current) => ({ ...current, country: e.target.value.toUpperCase() }))} placeholder="Country" required />
           </div>
-          <Button type="submit" disabled={creatingCity} className="w-full rounded-full bg-slate-950 hover:bg-slate-800">
+          <Button type="submit" disabled={creatingCity} className="w-full rounded-full">
             {creatingCity ? 'Creating...' : 'Create City'}
           </Button>
         </form>

@@ -11,20 +11,20 @@ export default async function PackagesPage() {
   const { data: packages } = await supabase.from('packages').select('*').eq('is_active', true).order('price', { ascending: true });
 
   return (
-    <div className="min-h-screen bg-[radial-gradient(circle_at_top,_rgba(14,165,233,0.12),_transparent_26%),linear-gradient(180deg,_#fffaf5_0%,_#ffffff_45%,_#f8fafc_100%)]">
-      <header className="sticky top-0 z-20 border-b border-white/50 bg-white/80 backdrop-blur-xl">
+    <div className="page-shell">
+      <header className="shell-header sticky top-0 z-20">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-          <Link href="/" className="text-xl font-semibold tracking-tight text-slate-950">AdFlow Pro</Link>
+          <Link href="/" className="brand-mark text-xl font-semibold tracking-tight text-slate-950">AdFlow Pro</Link>
           <div className="flex items-center gap-3">
             <Link href="/explore"><Button variant="ghost" className="rounded-full">Explore</Button></Link>
-            <Link href="/auth/register"><Button className="rounded-full bg-slate-950 hover:bg-slate-800">Start Campaign</Button></Link>
+            <Link href="/auth/register"><Button className="rounded-full">Start Campaign</Button></Link>
           </div>
         </div>
       </header>
 
       <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-        <section className="rounded-[2rem] bg-slate-950 px-6 py-8 text-white shadow-[0_40px_120px_rgba(15,23,42,0.22)] lg:px-10">
-          <p className="text-xs uppercase tracking-[0.35em] text-orange-300">Package Engine</p>
+        <section className="surface-dark hero-outline rounded-[2.25rem] px-6 py-8 text-white lg:px-10">
+          <p className="section-kicker">Package Engine</p>
           <h1 className="mt-4 text-4xl font-semibold tracking-tight sm:text-5xl">Choose the visibility tier that matches your growth goal.</h1>
           <p className="mt-4 max-w-3xl text-base leading-8 text-slate-300">
             Every package passes through moderation, payment verification, analytics tracking, and timed publishing. The difference is reach, weight, and featured treatment.
@@ -33,11 +33,11 @@ export default async function PackagesPage() {
 
         <div className="mt-8 grid gap-6 lg:grid-cols-3">
           {packages?.map((pkg: any) => (
-            <Card key={pkg.id} className={`rounded-[2rem] border-slate-200 bg-white/85 shadow-[0_20px_60px_rgba(15,23,42,0.08)] ${pkg.tier === 'premium' ? 'ring-2 ring-orange-400' : ''}`}>
+            <Card key={pkg.id} className={`surface-card rounded-[2rem] shadow-[0_20px_60px_rgba(15,23,42,0.08)] ${pkg.tier === 'premium' ? 'ring-2 ring-orange-300' : ''}`}>
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    {pkg.tier === 'premium' ? <Badge className="rounded-full bg-orange-500 text-slate-950 hover:bg-orange-500">Top Visibility</Badge> : null}
+                    {pkg.tier === 'premium' ? <Badge className="rounded-full border-orange-200 bg-orange-100 text-orange-700 hover:bg-orange-100">Top Visibility</Badge> : null}
                     <h2 className="mt-3 text-3xl font-semibold tracking-tight">{pkg.name}</h2>
                   </div>
                   <p className="text-xs uppercase tracking-[0.24em] text-slate-500">{pkg.tier}</p>
@@ -64,7 +64,7 @@ export default async function PackagesPage() {
                 </div>
 
                 <Link href="/auth/register" className="mt-8 block">
-                  <Button className={`w-full rounded-full ${pkg.tier === 'premium' ? 'bg-slate-950 hover:bg-slate-800' : ''}`} variant={pkg.tier === 'premium' ? 'default' : 'outline'}>
+                  <Button className="w-full rounded-full" variant={pkg.tier === 'premium' ? 'default' : 'outline'}>
                     Choose {pkg.name}
                   </Button>
                 </Link>

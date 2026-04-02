@@ -43,10 +43,10 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[radial-gradient(circle_at_top,_rgba(249,115,22,0.2),_transparent_30%),linear-gradient(180deg,_#fffaf5_0%,_#ffffff_45%,_#f8fafc_100%)] px-4 py-10">
+    <div className="page-shell px-4 py-10">
       <div className="mx-auto grid min-h-[calc(100vh-5rem)] max-w-6xl items-center gap-8 lg:grid-cols-[1fr_0.9fr]">
-        <div className="rounded-[2rem] bg-slate-950 p-8 text-white shadow-[0_40px_120px_rgba(15,23,42,0.24)]">
-          <p className="text-xs uppercase tracking-[0.35em] text-orange-300">AdFlow Pro</p>
+        <div className="surface-dark hero-outline rounded-[2.25rem] p-8 text-white">
+          <p className="section-kicker">AdFlow Pro</p>
           <h1 className="mt-4 text-4xl font-semibold tracking-tight sm:text-5xl">
             Sign in to move listings through the revenue workflow.
           </h1>
@@ -55,10 +55,10 @@ export default function LoginPage() {
           </p>
         </div>
 
-        <Card className="rounded-[2rem] border-slate-200 bg-white/85 shadow-[0_20px_60px_rgba(15,23,42,0.08)]">
+        <Card className="surface-card rounded-[2rem] shadow-[0_20px_60px_rgba(15,23,42,0.08)]">
           <CardContent className="p-8">
             <div className="mb-6">
-              <Link href="/" className="text-lg font-semibold text-slate-950">AdFlow Pro</Link>
+              <Link href="/" className="brand-mark text-lg font-semibold text-slate-950">AdFlow Pro</Link>
               <h2 className="mt-3 text-3xl font-semibold tracking-tight">Welcome back</h2>
               <p className="mt-2 text-sm text-slate-600">Enter your credentials to continue.</p>
             </div>
@@ -68,17 +68,25 @@ export default function LoginPage() {
                 <Input id="email" type="email" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} required />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="password">Password</Label>
+                <div className="flex items-center justify-between">
+                  <Label htmlFor="password">Password</Label>
+                  <Link
+                    href="/auth/forgot-password"
+                    className="text-xs font-medium text-primary transition-colors hover:text-orange-500"
+                  >
+                    Forgot password?
+                  </Link>
+                </div>
                 <Input id="password" type="password" value={formData.password} onChange={(e) => setFormData({ ...formData, password: e.target.value })} required />
               </div>
-              <Button type="submit" disabled={loading} className="w-full rounded-full bg-slate-950 py-6 text-base hover:bg-slate-800">
+              <Button type="submit" disabled={loading} className="w-full rounded-full py-6 text-base">
                 {loading ? 'Logging in...' : 'Continue to dashboard'}
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </form>
             <p className="mt-5 text-sm text-slate-600">
               Need an account?{' '}
-              <Link href="/auth/register" className="font-medium text-orange-600 hover:text-orange-500">
+              <Link href="/auth/register" className="font-medium text-primary hover:text-orange-500">
                 Create one
               </Link>
             </p>

@@ -86,7 +86,7 @@ export default async function AdDetailDashboardPage({ params }: { params: { id: 
                 </div>
                 {ad.status === 'draft' ? (
                   <Link href={`/dashboard/ads/${ad.id}/edit`}>
-                    <Button className="rounded-full bg-slate-950 hover:bg-slate-800">
+                    <Button className="rounded-full">
                       <Pencil className="mr-2 h-4 w-4" />
                       Edit Draft
                     </Button>

@@ -49,12 +49,12 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[radial-gradient(circle_at_top,_rgba(14,165,233,0.18),_transparent_28%),linear-gradient(180deg,_#fffdf8_0%,_#ffffff_50%,_#f8fafc_100%)] px-4 py-10">
+    <div className="page-shell px-4 py-10">
       <div className="mx-auto grid min-h-[calc(100vh-5rem)] max-w-6xl items-center gap-8 lg:grid-cols-[0.95fr_1.05fr]">
-        <Card className="order-2 rounded-[2rem] border-slate-200 bg-white/85 shadow-[0_20px_60px_rgba(15,23,42,0.08)] lg:order-1">
+        <Card className="surface-card order-2 rounded-[2rem] shadow-[0_20px_60px_rgba(15,23,42,0.08)] lg:order-1">
           <CardContent className="p-8">
             <div className="mb-6">
-              <Link href="/" className="text-lg font-semibold text-slate-950">AdFlow Pro</Link>
+              <Link href="/" className="brand-mark text-lg font-semibold text-slate-950">AdFlow Pro</Link>
               <h2 className="mt-3 text-3xl font-semibold tracking-tight">Create your client account</h2>
               <p className="mt-2 text-sm text-slate-600">Start submitting campaigns into the workflow engine.</p>
             </div>
@@ -72,22 +72,22 @@ export default function RegisterPage() {
                 <Input id="password" type="password" minLength={8} value={formData.password} onChange={(e) => setFormData({ ...formData, password: e.target.value })} required />
                 <p className="text-xs text-slate-500">At least 8 characters</p>
               </div>
-              <Button type="submit" disabled={loading} className="w-full rounded-full bg-slate-950 py-6 text-base hover:bg-slate-800">
+              <Button type="submit" disabled={loading} className="w-full rounded-full py-6 text-base">
                 {loading ? 'Creating account...' : 'Create account'}
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </form>
             <p className="mt-5 text-sm text-slate-600">
               Already registered?{' '}
-              <Link href="/auth/login" className="font-medium text-orange-600 hover:text-orange-500">
+              <Link href="/auth/login" className="font-medium text-primary hover:text-orange-500">
                 Sign in
               </Link>
             </p>
           </CardContent>
         </Card>
 
-        <div className="order-1 rounded-[2rem] bg-slate-950 p-8 text-white shadow-[0_40px_120px_rgba(15,23,42,0.24)] lg:order-2">
-          <p className="text-xs uppercase tracking-[0.35em] text-orange-300">Workflow Marketplace</p>
+        <div className="surface-dark hero-outline order-1 rounded-[2.25rem] p-8 text-white lg:order-2">
+          <p className="section-kicker">Workflow Marketplace</p>
           <h1 className="mt-4 text-4xl font-semibold tracking-tight sm:text-5xl">
             Publish only when content, payment, and timing all line up.
           </h1>

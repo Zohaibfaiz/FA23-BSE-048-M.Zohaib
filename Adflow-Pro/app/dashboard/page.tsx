@@ -41,7 +41,7 @@ export default async function DashboardPage() {
                 <h2 className="mt-2 text-2xl font-semibold">Campaign pipeline</h2>
               </div>
               <Link href="/dashboard/ads/create">
-                <Button className="rounded-full bg-slate-950 hover:bg-slate-800">
+                <Button className="rounded-full">
                   <Plus className="mr-2 h-4 w-4" />
                   New Ad
                 </Button>
