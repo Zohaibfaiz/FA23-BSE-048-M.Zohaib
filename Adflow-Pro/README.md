@@ -1,41 +1,43 @@
 # AdFlow Pro - Sponsored Listing Marketplace
 
 A production-ready sponsored listing marketplace with moderation, payment verification, automated scheduling, and analytics.
+## 🚀 Live Demo
+
+<h3>🌐 AdFlow Pro - Live Preview</h3>
+
+<p align="center">
+  <a href="https://adflow-pro-pink.vercel.app" target="_blank">
+    🔗 Click here to view the live project
+  </a>
+</p>
+
 
 ## 📸 Project Screenshots
 
-### 🏠 Home Page
-![Home Page](https://github.com/user-attachments/assets/a16b3693-779b-46f2-b984-7da4f29d514a)
+<p align="center">
 
----
+  <h3>🏠 Home Page</h3>
+  <img src="https://github.com/user-attachments/assets/bfdb5c11-3140-4f20-851a-ded600a18790" width="800"/><br><br>
 
-### 🔐 Login / Signup
-![Login](https://github.com/user-attachments/assets/b4bf83b6-983f-4fc2-87fe-c5deccf03ca7)
+  <h3>📋 Dashboard Overview</h3>
+  <img src="https://github.com/user-attachments/assets/c723752c-dc35-42d6-8fb3-a85cb97e7f94" width="800"/><br><br>
 
----
+  <h3>📊 Analytics / Data View</h3>
+  <img src="https://github.com/user-attachments/assets/7a5c9eea-9269-4ef9-83a3-73f1cb24d0bd" width="800"/><br><br>
 
-### 📊 Dashboard
-![Dashboard](https://github.com/user-attachments/assets/c65a85ce-a3d4-4778-8781-fa370cbe0174)
+  <h3>🔐 Authentication Pages</h3>
+  <img src="https://github.com/user-attachments/assets/d87ef4a6-af84-47c4-a4fc-40c7b6c3f568" width="400"/>
+  <img src="https://github.com/user-attachments/assets/a8e839df-1ac1-4b26-97e1-b09ec806b031" width="400"/><br><br>
 
----
+  <h3>⚙️ Features / Functional Screens</h3>
+  <img src="https://github.com/user-attachments/assets/a8305e61-432c-46cd-ac13-201b25f704c4" width="400"/>
+  <img src="https://github.com/user-attachments/assets/30ce2a43-98b5-4d8b-a40f-25cca8db4bb1" width="400"/><br><br>
 
-### 📚 Features Page
-![Features](https://github.com/user-attachments/assets/3c0ea494-766d-46ef-8446-7b0446025445)
+  <h3>📱 Responsive View</h3>
+  <img src="https://github.com/user-attachments/assets/e587f12e-e17c-408a-b5cc-747937c9980c" width="400"/>
 
----
+</p>
 
-### 👨‍🎓 User Panel
-![User Panel](https://github.com/user-attachments/assets/46a70359-5969-4d80-9a3e-bdf18d6db8a3)
-
----
-
-### ⚙️ Admin Panel
-![Admin Panel](https://github.com/user-attachments/assets/c36fe42f-c99f-405a-a233-d46426e3d0d5)
-
----
-
-### 📅 Additional Feature
-![Extra Feature](https://github.com/user-attachments/assets/92c34e91-c4b7-4e75-81a7-e488783099e1)
 
 ## 🚀 Quick Start
 
