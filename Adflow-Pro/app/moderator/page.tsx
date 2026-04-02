@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import Link from 'next/link';
 import Image from 'next/image';
 import { CheckCircle2, Clock3, Eye, ShieldCheck, XCircle } from 'lucide-react';

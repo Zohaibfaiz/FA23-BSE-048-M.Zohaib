@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import Link from 'next/link';
 import { Activity, Bell, CreditCard, FileText, Plus, Rocket, Sparkles } from 'lucide-react';
 import { ConsoleShell, LogoutAction } from '@/components/console-shell';

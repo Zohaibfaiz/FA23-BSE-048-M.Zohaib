@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { Activity, DollarSign, Layers3, ShieldAlert } from 'lucide-react';
 import { ConsoleShell, LogoutAction } from '@/components/console-shell';
 import { MetricCard } from '@/components/metric-card';
