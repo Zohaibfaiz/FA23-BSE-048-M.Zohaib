@@ -1,5 +1,5 @@
 import { createClient } from '@/lib/supabase/server';
-import { requireAuth, requireRole } from '@/lib/auth';
+import { requireAuth, requireRole, requireRolePage } from '@/lib/auth';
 import { calculateFreshnessPoints, calculateRankScore } from '@/lib/ranking';
 import type { AdStatus, UserRole } from '@/lib/types';
 
@@ -202,7 +202,7 @@ export async function getClientDashboardData() {
 }
 
 export async function getModeratorDashboardData() {
-  const user = await requireRole(['moderator', 'admin', 'super_admin']);
+  const user = await requireRolePage(['moderator', 'admin', 'super_admin']);
   const supabase = await createClient();
   const todayIso = new Date(new Date().setHours(0, 0, 0, 0)).toISOString();
 
@@ -246,7 +246,7 @@ export async function getModeratorDashboardData() {
 }
 
 export async function getAdminAnalyticsSummary() {
-  await requireRole(['admin', 'super_admin']);
+  await requireRolePage(['admin', 'super_admin']);
   const supabase = await createClient();
 
   const [{ data: ads }, { data: payments }, { data: history }, { data: categories }, { data: cities }] =
@@ -293,7 +293,7 @@ export async function getAdminAnalyticsSummary() {
 }
 
 export async function getAdminDashboardData() {
-  const user = await requireRole(['admin', 'super_admin']);
+  const user = await requireRolePage(['admin', 'super_admin']);
   const supabase = await createClient();
   const [summary, { data: pendingPayments }, { data: verifiedAds }, { data: healthLogs }] = await Promise.all([
     getAdminAnalyticsSummary(),
@@ -302,7 +302,7 @@ export async function getAdminDashboardData() {
       .select(`
         *,
         ad:ads(id, title, slug, status, user_id),
-        user:users(email, full_name),
+        user:users!payments_user_id_fkey(email, full_name),
         package:packages(name, duration_days, price)
       `)
       .eq('status', 'submitted')
@@ -314,7 +314,7 @@ export async function getAdminDashboardData() {
         package:packages(*),
         category:categories(*),
         city:cities(*),
-        user:users(email, full_name)
+        user:users!ads_user_id_fkey(email, full_name)
       `)
       .eq('status', 'payment_verified')
       .order('updated_at', { ascending: false }),
@@ -331,9 +331,9 @@ export async function getAdminDashboardData() {
 }
 
 export async function getSuperAdminDashboardData() {
-  const user = await requireRole(['super_admin']);
+  const user = await requireRolePage(['super_admin']);
   const supabase = await createClient();
-  const [summary, { data: packages }, { data: categories }, { data: cities }, { data: staff }] =
+  const [summary, { data: packages }, { data: categories }, { data: cities }, { data: staff }, { data: auditLogs }, { data: healthLogs }] =
     await Promise.all([
       getAdminAnalyticsSummary(),
       supabase.from('packages').select('*').order('price', { ascending: true }),
@@ -344,6 +344,16 @@ export async function getSuperAdminDashboardData() {
         .select('id, full_name, email, role, created_at')
         .in('role', ['moderator', 'admin', 'super_admin'])
         .order('created_at', { ascending: false }),
+      supabase
+        .from('audit_logs')
+        .select('*, user:users(full_name, email)')
+        .order('created_at', { ascending: false })
+        .limit(50),
+      supabase
+        .from('system_health_logs')
+        .select('*')
+        .order('created_at', { ascending: false })
+        .limit(20),
     ]);
 
   return {
@@ -353,6 +363,8 @@ export async function getSuperAdminDashboardData() {
     categories: categories ?? [],
     cities: cities ?? [],
     staff: staff ?? [],
+    auditLogs: auditLogs ?? [],
+    healthLogs: healthLogs ?? [],
   };
 }
 
@@ -365,4 +377,131 @@ export function getRoleLabel(role: UserRole) {
   };
 
   return labels[role];
+}
+
+export async function getAdminUsersData() {
+  await requireRolePage(['admin', 'super_admin']);
+  const supabase = await createClient();
+
+  const { data: users, error } = await supabase
+    .from('users')
+    .select('id, email, full_name, role, is_verified_seller, created_at, updated_at')
+    .order('created_at', { ascending: false });
+
+  if (error) throw error;
+  return users ?? [];
+}
+
+export async function getAdminAllAdsData(statusFilter?: string) {
+  await requireRolePage(['admin', 'super_admin']);
+  const supabase = await createClient();
+
+  let query = supabase
+    .from('ads')
+    .select(`
+      id, title, slug, status, created_at, updated_at, is_deleted, view_count, click_count,
+      user:users(email, full_name),
+      package:packages(name),
+      category:categories(name),
+      city:cities(name)
+    `)
+    .eq('is_deleted', false)
+    .order('created_at', { ascending: false });
+
+  if (statusFilter && statusFilter !== 'all') {
+    query = query.eq('status', statusFilter);
+  }
+
+  const { data, error } = await query;
+  if (error) throw error;
+  return data ?? [];
+}
+
+export async function getAdminAllPaymentsData() {
+  await requireRolePage(['admin', 'super_admin']);
+  const supabase = await createClient();
+
+  const { data, error } = await supabase
+    .from('payments')
+    .select(`
+      *,
+      ad:ads(id, title, slug),
+      user:users!payments_user_id_fkey(email, full_name),
+      package:packages(name, price)
+    `)
+    .order('created_at', { ascending: false });
+
+  if (error) throw error;
+  return data ?? [];
+}
+
+export async function getOverviewStats() {
+  await requireRolePage(['admin', 'super_admin']);
+  const supabase = await createClient();
+
+  const [
+    { count: totalUsers },
+    { count: totalAds },
+    { count: pendingAds },
+    { count: publishedAds },
+    { count: archivedAds },
+    { count: scheduledAds },
+  ] = await Promise.all([
+    supabase.from('users').select('*', { count: 'exact', head: true }),
+    supabase.from('ads').select('*', { count: 'exact', head: true }).eq('is_deleted', false),
+    supabase.from('ads').select('*', { count: 'exact', head: true }).in('status', ['submitted', 'under_review']),
+    supabase.from('ads').select('*', { count: 'exact', head: true }).eq('status', 'published'),
+    supabase.from('ads').select('*', { count: 'exact', head: true }).eq('status', 'archived'),
+    supabase.from('ads').select('*', { count: 'exact', head: true }).eq('status', 'scheduled'),
+  ]);
+
+  return {
+    totalUsers: totalUsers ?? 0,
+    totalAds: totalAds ?? 0,
+    pendingAds: pendingAds ?? 0,
+    publishedAds: publishedAds ?? 0,
+    archivedAds: archivedAds ?? 0,
+    scheduledAds: scheduledAds ?? 0,
+  };
+}
+
+export async function getModeratorApprovedAdsData() {
+  await requireRolePage(['moderator', 'admin', 'super_admin']);
+  const supabase = await createClient();
+
+  const { data, error } = await supabase
+    .from('ads')
+    .select(`
+      id, title, slug, status, created_at, updated_at, moderation_notes,
+      user:users(email, full_name),
+      category:categories(name),
+      city:cities(name)
+    `)
+    .in('status', ['payment_pending', 'payment_submitted', 'payment_verified', 'scheduled', 'published'])
+    .eq('is_deleted', false)
+    .order('updated_at', { ascending: false });
+
+  if (error) throw error;
+  return data ?? [];
+}
+
+export async function getModeratorRejectedAdsData() {
+  await requireRolePage(['moderator', 'admin', 'super_admin']);
+  const supabase = await createClient();
+
+  const { data, error } = await supabase
+    .from('ads')
+    .select(`
+      id, title, slug, status, created_at, updated_at, rejection_reason, moderation_notes,
+      user:users(email, full_name),
+      category:categories(name),
+      city:cities(name)
+    `)
+    .eq('status', 'archived')
+    .not('rejection_reason', 'is', null)
+    .eq('is_deleted', false)
+    .order('updated_at', { ascending: false });
+
+  if (error) throw error;
+  return data ?? [];
 }

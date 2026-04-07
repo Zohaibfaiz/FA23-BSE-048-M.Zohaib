@@ -36,11 +36,12 @@ export default function ForgotPasswordPage() {
     setLoading(true);
 
     try {
+      const email = formData.email.trim().toLowerCase();
       const response = await fetch('/api/auth/force-reset', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          email: formData.email,
+          email,
           password: formData.password,
         }),
       });

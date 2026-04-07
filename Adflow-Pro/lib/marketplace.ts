@@ -501,7 +501,7 @@ export async function getAdminPaymentQueue() {
     .select(`
       *,
       ad:ads(id, title, slug, status, user_id),
-      user:users(email, full_name),
+      user:users!payments_user_id_fkey(email, full_name),
       package:packages(name, duration_days, price)
     `)
     .eq('status', 'submitted')

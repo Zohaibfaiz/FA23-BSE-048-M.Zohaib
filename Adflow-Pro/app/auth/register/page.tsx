@@ -17,17 +17,29 @@ export default function RegisterPage() {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
+    confirmPassword: '',
     full_name: '',
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (formData.password.length < 8) {
+      toast.error('Password must be at least 8 characters');
+      return;
+    }
+    if (formData.password !== formData.confirmPassword) {
+      toast.error('Passwords do not match');
+      return;
+    }
     setLoading(true);
 
     try {
       const supabase = createClient();
-      const { error } = await supabase.auth.signUp({
-        email: formData.email,
+      const email = formData.email.trim().toLowerCase();
+
+      // 1. Create auth user
+      const { data, error } = await supabase.auth.signUp({
+        email,
         password: formData.password,
         options: {
           data: {
@@ -39,7 +51,30 @@ export default function RegisterPage() {
 
       if (error) throw error;
 
-      toast.success('Account created. Check your inbox for verification.');
+      // 2. Insert into users table
+      if (data.user) {
+        const { error: userError } = await supabase.from('users').insert({
+          id: data.user.id,
+          email,
+          full_name: formData.full_name,
+          role: 'client',
+        });
+        // Ignore duplicate key errors (trigger may have already created the row)
+        if (userError && !userError.message.includes('duplicate')) {
+          console.warn('User insert warning:', userError.message);
+        }
+
+        // 3. Insert into seller_profiles table
+        const { error: profileError } = await supabase.from('seller_profiles').insert({
+          user_id: data.user.id,
+          business_name: formData.full_name,
+        });
+        if (profileError && !profileError.message.includes('duplicate')) {
+          console.warn('Seller profile insert warning:', profileError.message);
+        }
+      }
+
+      toast.success('Account created successfully!');
       router.push('/auth/login');
     } catch (error) {
       toast.error(error instanceof Error ? error.message : 'Failed to register');
@@ -71,6 +106,10 @@ export default function RegisterPage() {
                 <Label htmlFor="password">Password</Label>
                 <Input id="password" type="password" minLength={8} value={formData.password} onChange={(e) => setFormData({ ...formData, password: e.target.value })} required />
                 <p className="text-xs text-slate-500">At least 8 characters</p>
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="confirmPassword">Confirm Password</Label>
+                <Input id="confirmPassword" type="password" minLength={8} value={formData.confirmPassword} onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })} required />
               </div>
               <Button type="submit" disabled={loading} className="w-full rounded-full py-6 text-base">
                 {loading ? 'Creating account...' : 'Create account'}

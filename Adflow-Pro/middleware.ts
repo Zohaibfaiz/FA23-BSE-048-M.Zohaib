@@ -1,5 +1,6 @@
 import { createServerClient } from '@supabase/ssr';
 import { NextResponse, type NextRequest } from 'next/server';
+import { getLoginPathForProtectedPath } from '@/lib/auth-config';
 import { ROLE_DASHBOARD } from '@/lib/workflow';
 
 export async function middleware(request: NextRequest) {
@@ -47,8 +48,11 @@ export async function middleware(request: NextRequest) {
       } = await supabase.auth.getUser();
 
       if (!user) {
-        const redirectUrl = new URL('/auth/login', request.url);
-        redirectUrl.searchParams.set('redirect', request.nextUrl.pathname);
+        const redirectUrl = new URL(getLoginPathForProtectedPath(request.nextUrl.pathname), request.url);
+        redirectUrl.searchParams.set(
+          'redirect',
+          `${request.nextUrl.pathname}${request.nextUrl.search}`
+        );
         return NextResponse.redirect(redirectUrl);
       }
 

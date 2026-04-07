@@ -11,6 +11,13 @@ import { Card, CardContent } from '@/components/ui/card';
 import { createClient } from '@/lib/supabase/client';
 import toast from 'react-hot-toast';
 
+const ROLE_DASHBOARD: Record<string, string> = {
+  client: '/dashboard',
+  moderator: '/moderator',
+  admin: '/admin',
+  super_admin: '/super-admin',
+};
+
 export default function LoginPage() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -25,18 +32,33 @@ export default function LoginPage() {
 
     try {
       const supabase = createClient();
-      const { error } = await supabase.auth.signInWithPassword({
-        email: formData.email,
+      const email = formData.email.trim().toLowerCase();
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
         password: formData.password,
       });
 
       if (error) throw error;
 
+      // Fetch user role to redirect to correct dashboard
+      const { data: userData } = await supabase
+        .from('users')
+        .select('role')
+        .eq('id', data.user.id)
+        .single();
+
+      const role = userData?.role || 'client';
+      const redirectPath = ROLE_DASHBOARD[role] || '/dashboard';
+
       toast.success('Logged in successfully');
-      router.push('/dashboard');
+      router.push(redirectPath);
       router.refresh();
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : 'Failed to login');
+      const message = error instanceof Error ? error.message : 'Failed to login';
+      const friendlyMessage = message.toLowerCase().includes('invalid login credentials')
+        ? 'Email or password is incorrect. Check for extra spaces, then try again or reset your password.'
+        : message;
+      toast.error(friendlyMessage);
     } finally {
       setLoading(false);
     }

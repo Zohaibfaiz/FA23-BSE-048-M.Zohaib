@@ -1,15 +1,17 @@
 import { z } from 'zod';
 
+const EmailSchema = z.string().trim().toLowerCase().email('Invalid email address');
+
 // ============================================================
 // AUTH SCHEMAS
 // ============================================================
 export const LoginSchema = z.object({
-  email: z.string().email('Invalid email address'),
+  email: EmailSchema,
   password: z.string().min(8, 'Password must be at least 8 characters'),
 });
 
 export const RegisterSchema = z.object({
-  email: z.string().email('Invalid email address'),
+  email: EmailSchema,
   password: z.string().min(8, 'Password must be at least 8 characters'),
   full_name: z.string().min(2, 'Full name must be at least 2 characters').max(100),
   role: z.enum(['client', 'moderator', 'admin', 'super_admin']).default('client'),

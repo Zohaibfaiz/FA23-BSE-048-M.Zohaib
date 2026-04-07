@@ -1,5 +1,7 @@
 import { createClient } from './supabase/server';
-import { UserRole } from './types';
+import { redirect } from 'next/navigation';
+import type { UserRole } from './types';
+import { ROLE_DASHBOARD } from './workflow';
 
 /**
  * Get current authenticated user with role
@@ -49,5 +51,33 @@ export async function requireRole(requiredRoles: UserRole[]) {
   if (!requiredRoles.includes(user.role)) {
     throw new Error('Forbidden');
   }
+  return user;
+}
+
+/**
+ * Require authentication inside pages/layouts and redirect to a login portal.
+ */
+export async function requireAuthPage(loginPath = '/auth/login') {
+  const user = await getCurrentUser();
+  if (!user) {
+    redirect(loginPath);
+  }
+  return user;
+}
+
+/**
+ * Require a role inside pages/layouts and redirect unauthorized users to their own workspace.
+ */
+export async function requireRolePage(requiredRoles: UserRole[], loginPath = '/auth/login') {
+  const user = await getCurrentUser();
+
+  if (!user) {
+    redirect(loginPath);
+  }
+
+  if (!requiredRoles.includes(user.role)) {
+    redirect(ROLE_DASHBOARD[user.role as UserRole] ?? '/dashboard');
+  }
+
   return user;
 }

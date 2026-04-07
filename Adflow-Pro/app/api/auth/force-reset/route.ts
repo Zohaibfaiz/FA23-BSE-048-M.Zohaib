@@ -4,8 +4,9 @@ import { NextResponse } from 'next/server';
 export async function POST(request: Request) {
   try {
     const { email, password } = await request.json();
+    const normalizedEmail = typeof email === 'string' ? email.trim().toLowerCase() : '';
 
-    if (!email || !password || password.length < 8) {
+    if (!normalizedEmail || !password || password.length < 8) {
       return NextResponse.json({ error: 'Valid email and password (minimum 8 characters) are required' }, { status: 400 });
     }
 
@@ -15,7 +16,7 @@ export async function POST(request: Request) {
     const { data: userData, error: userError } = await supabase
       .from('users')
       .select('id')
-      .eq('email', email)
+      .eq('email', normalizedEmail)
       .maybeSingle();
 
     if (userError || !userData) {

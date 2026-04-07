@@ -1,7 +1,6 @@
 export const dynamic = 'force-dynamic';
 
 import { Activity, DollarSign, Layers3, ShieldAlert } from 'lucide-react';
-import { ConsoleShell, LogoutAction } from '@/components/console-shell';
 import { MetricCard } from '@/components/metric-card';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -13,19 +12,13 @@ export default async function AdminDashboardPage() {
   const data = await getAdminDashboardData();
 
   return (
-    <ConsoleShell
-      brandTag="Admin Control"
-      title="Verify payments, schedule launches, and watch marketplace health from one operations layer."
-      subtitle="Revenue, verification queues, publishing controls, and system health all feed the same production workflow."
-      userLabel={data.user.full_name || data.user.email}
-      navItems={[
-        { href: '/moderator', label: 'Moderator Desk' },
-        { href: '/super-admin', label: 'Super Admin' },
-        { href: '/dashboard', label: 'Client Dashboard' },
-      ]}
-      actions={<LogoutAction />}
-    >
-      <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+    <>
+      <div className="page-title-bar">
+        <h1>Admin Overview</h1>
+        <p>Verify payments, schedule launches, and monitor marketplace health.</p>
+      </div>
+
+      <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4 mb-6">
         <MetricCard label="Verified Revenue" value={formatCurrency(data.summary.verifiedRevenue)} icon={<DollarSign className="h-5 w-5 text-emerald-500" />} />
         <MetricCard label="Total Ads" value={data.summary.totalAds} icon={<Layers3 className="h-5 w-5 text-slate-400" />} />
         <MetricCard label="Active Ads" value={data.summary.activeAds} icon={<Activity className="h-5 w-5 text-sky-500" />} />
@@ -70,8 +63,10 @@ export default async function AdminDashboardPage() {
                   </div>
                 ))
               ) : (
-                <div className="rounded-[1.5rem] border border-dashed border-slate-300 bg-slate-50/70 p-10 text-center text-slate-600">
-                  No payments are pending verification.
+                <div className="empty-state">
+                  <ShieldAlert className="h-10 w-10 text-slate-400" />
+                  <h3>No pending payments</h3>
+                  <p>All payments have been processed.</p>
                 </div>
               )}
             </div>
@@ -118,6 +113,6 @@ export default async function AdminDashboardPage() {
           </Card>
         </div>
       </section>
-    </ConsoleShell>
+    </>
   );
 }

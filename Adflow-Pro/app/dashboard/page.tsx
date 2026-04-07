@@ -2,7 +2,6 @@ export const dynamic = 'force-dynamic';
 
 import Link from 'next/link';
 import { Activity, Bell, CreditCard, FileText, Plus, Rocket, Sparkles } from 'lucide-react';
-import { ConsoleShell, LogoutAction } from '@/components/console-shell';
 import { MetricCard } from '@/components/metric-card';
 import { StatusPill } from '@/components/status-pill';
 import { Button } from '@/components/ui/button';
@@ -14,20 +13,13 @@ export default async function DashboardPage() {
   const data = await getClientDashboardData();
 
   return (
-    <ConsoleShell
-      brandTag="Client Console"
-      title="Launch, track, and optimize every sponsored listing from one operating dashboard."
-      subtitle="Follow each listing through moderation, payment verification, scheduling, and publishing with live status visibility."
-      userLabel={data.user.full_name || data.user.email}
-      navItems={[
-        { href: '/dashboard/ads/create', label: 'Create Ad' },
-        { href: '/explore', label: 'Marketplace' },
-        { href: '/packages', label: 'Packages' },
-        { href: '/contact', label: 'Support' },
-      ]}
-      actions={<LogoutAction />}
-    >
-      <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+    <>
+      <div className="page-title-bar">
+        <h1>Client Dashboard</h1>
+        <p>Launch, track, and optimize every sponsored listing.</p>
+      </div>
+
+      <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4 mb-6">
         <MetricCard label="Total Ads" value={data.stats.totalAds} icon={<FileText className="h-5 w-5 text-slate-400" />} />
         <MetricCard label="Published" value={data.stats.publishedAds} icon={<Rocket className="h-5 w-5 text-emerald-500" />} />
         <MetricCard label="In Progress" value={data.stats.pendingAds} icon={<Activity className="h-5 w-5 text-orange-500" />} />
@@ -78,10 +70,10 @@ export default async function DashboardPage() {
                   </div>
                 ))
               ) : (
-                <div className="rounded-[1.5rem] border border-dashed border-slate-300 bg-slate-50/70 p-10 text-center">
-                  <Sparkles className="mx-auto h-10 w-10 text-orange-500" />
-                  <h3 className="mt-4 text-xl font-semibold">No campaigns yet</h3>
-                  <p className="mt-2 text-sm text-slate-600">Create your first listing and push it through the approval workflow.</p>
+                <div className="empty-state">
+                  <Sparkles className="h-10 w-10 text-orange-500" />
+                  <h3>No campaigns yet</h3>
+                  <p>Create your first listing and push it through the approval workflow.</p>
                 </div>
               )}
             </div>
@@ -131,6 +123,6 @@ export default async function DashboardPage() {
           </Card>
         </div>
       </section>
-    </ConsoleShell>
+    </>
   );
 }

@@ -2,8 +2,7 @@ export const dynamic = 'force-dynamic';
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { CheckCircle2, Clock3, Eye, ShieldCheck, XCircle } from 'lucide-react';
-import { ConsoleShell, LogoutAction } from '@/components/console-shell';
+import { CheckCircle2, Clock3, Eye, ShieldCheck, XCircle, Inbox } from 'lucide-react';
 import { MetricCard } from '@/components/metric-card';
 import { StatusPill } from '@/components/status-pill';
 import { Button } from '@/components/ui/button';
@@ -16,19 +15,13 @@ export default async function ModeratorDashboardPage() {
   const data = await getModeratorDashboardData();
 
   return (
-    <ConsoleShell
-      brandTag="Moderator Desk"
-      title="Moderate incoming campaigns with clear context, seller trust signals, and fast decisions."
-      subtitle="Queue management is centered around content quality, verified media links, and workflow-safe approvals."
-      userLabel={data.user.full_name || data.user.email}
-      navItems={[
-        { href: '/dashboard', label: 'Client View' },
-        { href: '/admin', label: 'Admin Console' },
-        { href: '/explore', label: 'Public Marketplace' },
-      ]}
-      actions={<LogoutAction />}
-    >
-      <section className="grid gap-4 md:grid-cols-3">
+    <>
+      <div className="page-title-bar">
+        <h1>Review Queue</h1>
+        <p>Moderate incoming campaigns with clear context and fast decisions.</p>
+      </div>
+
+      <section className="grid gap-4 md:grid-cols-3 mb-6">
         <MetricCard label="Pending Review" value={data.stats.pendingCount} icon={<Clock3 className="h-5 w-5 text-orange-500" />} />
         <MetricCard label="Approved Today" value={data.stats.approvedToday} icon={<CheckCircle2 className="h-5 w-5 text-emerald-500" />} />
         <MetricCard label="Rejected Today" value={data.stats.rejectedToday} icon={<XCircle className="h-5 w-5 text-rose-500" />} />
@@ -37,7 +30,7 @@ export default async function ModeratorDashboardPage() {
       <Card className="rounded-[2rem] border-slate-200 bg-white/85 shadow-[0_18px_50px_rgba(15,23,42,0.06)]">
         <CardContent className="p-6">
           <div className="mb-6">
-            <p className="text-xs uppercase tracking-[0.28em] text-slate-500">Review Queue</p>
+            <p className="text-xs uppercase tracking-[0.28em] text-slate-500">Queue</p>
             <h2 className="mt-2 text-2xl font-semibold">Listings waiting for moderation</h2>
           </div>
           <div className="space-y-5">
@@ -78,6 +71,12 @@ export default async function ModeratorDashboardPage() {
                       <form action="/api/moderator/review" method="POST" className="space-y-3">
                         <input type="hidden" name="ad_id" value={ad.id} />
                         <input type="hidden" name="action" value="approve" />
+                        <textarea
+                          name="notes"
+                          placeholder="Approval notes (optional)"
+                          rows={2}
+                          className="w-full rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm placeholder:text-slate-400 focus:border-orange-300 focus:outline-none focus:ring-2 focus:ring-orange-100"
+                        />
                         <Button type="submit" className="w-full rounded-full bg-emerald-500 text-white hover:bg-emerald-600">
                           Approve
                         </Button>
@@ -85,12 +84,19 @@ export default async function ModeratorDashboardPage() {
                       <form action="/api/moderator/review" method="POST" className="space-y-3">
                         <input type="hidden" name="ad_id" value={ad.id} />
                         <input type="hidden" name="action" value="reject" />
+                        <textarea
+                          name="rejection_reason"
+                          placeholder="Rejection reason (required)"
+                          rows={2}
+                          required
+                          className="w-full rounded-xl border border-red-200 bg-white px-4 py-2 text-sm placeholder:text-slate-400 focus:border-red-300 focus:outline-none focus:ring-2 focus:ring-red-100"
+                        />
                         <Button type="submit" variant="destructive" className="w-full rounded-full">
                           Reject
                         </Button>
                       </form>
                       <Link href={`/ads/${ad.slug}`} target="_blank">
-                        <Button variant="outline" className="w-full rounded-full">
+                        <Button variant="outline" className="w-full rounded-full mt-1">
                           <Eye className="mr-2 h-4 w-4" />
                           Preview
                         </Button>
@@ -100,13 +106,15 @@ export default async function ModeratorDashboardPage() {
                 </div>
               ))
             ) : (
-              <div className="rounded-[1.5rem] border border-dashed border-slate-300 bg-slate-50/70 p-10 text-center text-slate-600">
-                No ads are waiting for moderation right now.
+              <div className="empty-state">
+                <Inbox className="h-10 w-10 text-slate-400" />
+                <h3>Queue is clear</h3>
+                <p>No ads are waiting for moderation right now.</p>
               </div>
             )}
           </div>
         </CardContent>
       </Card>
-    </ConsoleShell>
+    </>
   );
 }
