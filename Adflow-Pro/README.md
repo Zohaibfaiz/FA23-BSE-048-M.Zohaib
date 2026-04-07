@@ -1,7 +1,5 @@
-<img width="959" height="539" alt="2" src="https://github.com/user-attachments/assets/a47e9893-9696-4b2c-8370-1e483a75a973" /># AdFlow Pro - Sponsored Listing Marketplace
 
 A production-ready sponsored listing marketplace with moderation, payment verification, automated scheduling, and analytics.
-## 🚀 Live Demo
 
 
 
