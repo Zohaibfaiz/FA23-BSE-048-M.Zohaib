@@ -106,12 +106,50 @@ export default function LoginPage() {
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </form>
-            <p className="mt-5 text-sm text-slate-600">
-              Need an account?{' '}
-              <Link href="/auth/register" className="font-medium text-primary hover:text-orange-500">
-                Create one
-              </Link>
-            </p>
+            <div className="mt-8 border-t border-slate-100 pt-6">
+              <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-slate-400">Quick Access / Test Accounts</p>
+              <div className="grid gap-2 sm:grid-cols-2">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="justify-start rounded-xl text-xs"
+                  onClick={() => setFormData({ email: 'client@test.com', password: 'Client@123' })}
+                >
+                  <span className="mr-2 h-2 w-2 rounded-full bg-emerald-500"></span>
+                  Client Account
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="justify-start rounded-xl text-xs"
+                  onClick={() => setFormData({ email: 'moderator@adflow.com', password: 'Moderator@123' })}
+                >
+                  <span className="mr-2 h-2 w-2 rounded-full bg-sky-500"></span>
+                  Moderator
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="justify-start rounded-xl text-xs"
+                  onClick={() => setFormData({ email: 'admin@adflow.com', password: 'Admin@123' })}
+                >
+                  <span className="mr-2 h-2 w-2 rounded-full bg-orange-500"></span>
+                  Admin
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="justify-start rounded-xl text-xs"
+                  onClick={() => setFormData({ email: 'super@adflow.com', password: 'SuperAdmin@123' })}
+                >
+                  <span className="mr-2 h-2 w-2 rounded-full bg-indigo-500"></span>
+                  Super Admin
+                </Button>
+              </div>
+              <p className="mt-3 text-[10px] text-slate-400">
+                Note: These accounts must exist in your Supabase project.
+              </p>
+            </div>
           </CardContent>
         </Card>
       </div>
