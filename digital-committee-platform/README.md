@@ -19,7 +19,7 @@ This project was generated using [Angular CLI](https://github.com/angular/angula
 <p align="center">
   <img src="https://github.com/user-attachments/assets/e67774b2-ac50-40cd-826f-2b04f70521d7" width="30%" />
   <img src="https://github.com/user-attachments/assets/2afbfe44-e977-4c8b-87c8-9a438a61820e" width="30%" />
-  <img src="https://github.com/user-attachments/assets/d1750097-ed40-4081-99b1-b857013feb76" width="30%" />
+  
 </p>
 ## Development server
 
