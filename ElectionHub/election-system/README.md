@@ -41,9 +41,8 @@ Built using modern technologies like React, Vite, Tailwind CSS, and Supabase, th
 
 ## 🏠 Landing Page
 
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/31d0c793-f418-44ed-98e3-73ac3e80dec2" width="100%" alt="Landing Page"/>
-</p>
+<img width="1747" height="897" alt="Screenshot 2026-05-20 104510" src="https://github.com/user-attachments/assets/d6c411cc-f28b-485b-8385-f06875f247ff" />
+
 
 Modern responsive homepage with professional UI, animations, and election highlights.
 
