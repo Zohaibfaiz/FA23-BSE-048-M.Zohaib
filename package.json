@@ -1,0 +1,10 @@
+{
+    "name":  "fa23-bse-048-m-zohaib",
+    "private":  true,
+    "version":  "0.0.0",
+    "scripts":  {
+                    "build":  "npm --prefix ElectionHub/election-system run build",
+                    "dev":  "npm --prefix ElectionHub/election-system run dev",
+                    "preview":  "npm --prefix ElectionHub/election-system run preview"
+                }
+}
