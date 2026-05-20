@@ -1,3 +1,8 @@
+
+
+[![Live Now](https://img.shields.io/badge/Live%20Now-Visit%20Website-000?style=for-the-badge&logo=vercel)](https://fa23-bse-014-ahmar-k3cz.vercel.app)
+
+---
 # 🗳️ SecureVote Pro  
 ### Transparent • Secure • Anonymous • Real-Time Elections
 
@@ -8,6 +13,10 @@
   <img src="https://img.shields.io/badge/Supabase-Backend-green?logo=supabase"/>
   <img src="https://img.shields.io/badge/TailwindCSS-Styling-38BDF8?logo=tailwindcss"/>
   <img src="https://img.shields.io/badge/Security-Encrypted-red"/>
+  <img width="1653" height="938" alt="Screenshot 2026-05-20 104714" src="https://github.com/user-attachments/assets/30625597-e115-4e7d-9e0c-536a227b1fda" />
+  <img width="1769" height="961" alt="Screenshot 2026-05-20 104829" src="https://github.com/user-attachments/assets/ae06c724-8a2e-483d-a2b4-c2ba2367b09b" />
+
+
 </p>
 
 ---
