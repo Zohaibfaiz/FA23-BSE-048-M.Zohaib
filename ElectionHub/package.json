@@ -1,0 +1,10 @@
+{
+  "name": "electionhub",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "build": "npm --prefix election-system run build",
+    "dev": "npm --prefix election-system run dev",
+    "preview": "npm --prefix election-system run preview"
+  }
+}
