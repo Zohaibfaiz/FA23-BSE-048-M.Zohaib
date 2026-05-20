@@ -1,9 +1,6 @@
 # 🗳️ SecureVote Pro  
 ### Transparent • Secure • Anonymous • Real-Time Elections
 
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/7775965e-8470-4591-913d-ea23bee8aa5a" width="100%" alt="SecureVote Pro Banner"/>
-</p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/React-18-blue?logo=react"/>
@@ -98,11 +95,8 @@ Live result tracking system with instant updates and visual charts.
 
 ---
 
-## ⚙️ Admin Monitoring Panel
 
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/835c9341-5e75-44e2-9702-526774d7f17f" width="100%" alt="Admin Panel"/>
-</p>
+
 
 Comprehensive admin dashboard with audit logs and user management.
 
