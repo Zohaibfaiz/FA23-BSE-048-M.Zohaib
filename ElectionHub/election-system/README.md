@@ -1,9 +1,11 @@
+
+
+[![Live Now](https://img.shields.io/badge/Live%20Now-Visit%20Website-000?style=for-the-badge&logo=vercel)](https://fa23-bse-014-ahmar-k3cz.vercel.app)
+
+---
 # 🗳️ SecureVote Pro  
 ### Transparent • Secure • Anonymous • Real-Time Elections
 
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/7775965e-8470-4591-913d-ea23bee8aa5a" width="100%" alt="SecureVote Pro Banner"/>
-</p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/React-18-blue?logo=react"/>
@@ -11,6 +13,10 @@
   <img src="https://img.shields.io/badge/Supabase-Backend-green?logo=supabase"/>
   <img src="https://img.shields.io/badge/TailwindCSS-Styling-38BDF8?logo=tailwindcss"/>
   <img src="https://img.shields.io/badge/Security-Encrypted-red"/>
+  <img width="1653" height="938" alt="Screenshot 2026-05-20 104714" src="https://github.com/user-attachments/assets/30625597-e115-4e7d-9e0c-536a227b1fda" />
+  <img width="1769" height="961" alt="Screenshot 2026-05-20 104829" src="https://github.com/user-attachments/assets/ae06c724-8a2e-483d-a2b4-c2ba2367b09b" />
+
+
 </p>
 
 ---
@@ -41,9 +47,8 @@ Built using modern technologies like React, Vite, Tailwind CSS, and Supabase, th
 
 ## 🏠 Landing Page
 
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/31d0c793-f418-44ed-98e3-73ac3e80dec2" width="100%" alt="Landing Page"/>
-</p>
+<img width="1747" height="897" alt="Screenshot 2026-05-20 104510" src="https://github.com/user-attachments/assets/d6c411cc-f28b-485b-8385-f06875f247ff" />
+
 
 Modern responsive homepage with professional UI, animations, and election highlights.
 
@@ -99,11 +104,8 @@ Live result tracking system with instant updates and visual charts.
 
 ---
 
-## ⚙️ Admin Monitoring Panel
 
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/835c9341-5e75-44e2-9702-526774d7f17f" width="100%" alt="Admin Panel"/>
-</p>
+
 
 Comprehensive admin dashboard with audit logs and user management.
 
