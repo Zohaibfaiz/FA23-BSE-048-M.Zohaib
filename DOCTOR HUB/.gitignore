@@ -1,0 +1,11 @@
+node_modules/
+.env
+dist/
+uploads/*
+!backend/uploads/.gitkeep
+*.log
+.DS_Store
+
+# Vercel
+.vercel
+.vercel/*

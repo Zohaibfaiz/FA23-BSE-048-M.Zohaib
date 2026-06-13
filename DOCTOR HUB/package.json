@@ -1,0 +1,27 @@
+{
+  "name": "doctor-hub",
+  "version": "1.0.0",
+  "description": "Doctor Hub - Complete Healthcare Management System",
+  "private": true,
+  "scripts": {
+    "install:all": "cd backend && npm install && cd ../frontend && npm install",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "seed": "cd backend && npm run seed",
+    "start:backend": "cd backend && npm start",
+    "build:frontend": "cd frontend && npm run build"
+  },
+  "keywords": [
+    "doctor",
+    "hospital",
+    "healthcare",
+    "appointment",
+    "management"
+  ],
+  "author": "Doctor Hub Team",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
